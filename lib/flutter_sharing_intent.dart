@@ -54,6 +54,8 @@ class FlutterSharingIntent {
             if (data == null) {
               sink.add([]);
             } else {
+              print("[DEBUG f_shar_int] data: $data");
+              
               final encoded = jsonDecode(data);
               sink.add(encoded
                   .map<SharedFile>((file) => SharedFile.fromJson(file))
