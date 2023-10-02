@@ -124,6 +124,7 @@ public class SwiftFlutterSharingIntentPlugin: NSObject, FlutterStreamHandler, Fl
             let appGroupId = (Bundle.main.object(forInfoDictionaryKey: "AppGroupId") as? String) ?? "group.\(Bundle.main.bundleIdentifier!)"
             let userDefaults = UserDefaults(suiteName: appGroupId)
 
+            print("[DEBUG Plugin] appGroupId: \(appGroupId)")
 
             if url.fragment == "media" {
                 if let key = url.host?.components(separatedBy: "=").last,
@@ -152,6 +153,10 @@ public class SwiftFlutterSharingIntentPlugin: NSObject, FlutterStreamHandler, Fl
             } else if url.fragment == "file" {
                 if let key = url.host?.components(separatedBy: "=").last,
                    let json = userDefaults?.object(forKey: key) as? Data {
+
+                    print("[DEBUG Plugin] key: \(key)")
+                    print("[DEBUG Plugin] json: \(json)")
+
                     let sharedArray = decode(data: json)
                     let sharedMediaFiles: [SharingFile] = sharedArray.compactMap{
                         guard getAbsolutePath(for: $0.value) != nil else {
