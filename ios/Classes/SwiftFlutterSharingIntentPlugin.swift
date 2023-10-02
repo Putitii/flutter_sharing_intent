@@ -251,6 +251,7 @@ public class SwiftFlutterSharingIntentPlugin: NSObject, FlutterStreamHandler, Fl
     }
     
     private func decode(data: Data) -> [SharingFile] {
+        print("[DEBUG decode] data: \(data)");
         do {
             let encodedData = try JSONDecoder().decode([SharingFile].self, from: data)
             return encodedData
