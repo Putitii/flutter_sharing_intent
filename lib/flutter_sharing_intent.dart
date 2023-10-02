@@ -51,10 +51,11 @@ class FlutterSharingIntent {
       _streamMedia = stream.transform<List<SharedFile>>(
         StreamTransformer<String?, List<SharedFile>>.fromHandlers(
           handleData: (String? data, EventSink<List<SharedFile>> sink) {
+              print("[DEBUG f_shar_int] data: $data");
+
             if (data == null) {
               sink.add([]);
             } else {
-              print("[DEBUG f_shar_int] data: $data");
               
               final encoded = jsonDecode(data);
               sink.add(encoded
